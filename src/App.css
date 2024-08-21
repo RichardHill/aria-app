@@ -5,38 +5,99 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+/* App.css */
+
+/* Reset and basic styles */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+
+  /* Flexbox to center content vertically and horizontally */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: flex-start; /* Align content at the top */
+  align-items: center; /* Center content horizontally */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Ensure the #root div takes up full width */
+#root {
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Center the .card container horizontally and stack content inside vertically */
 .card {
-  padding: 2em;
+  padding: 20px;
+  background-color: #000000;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  max-width: 800px; /* Maximum width for the card */
+  width: 100%; /* Make card take full width until max-width */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center; /* Center the content inside the card */
 }
 
-.read-the-docs {
-  color: #888;
+/* Tree container */
+.tree-container {
+  width: 100%;
+  overflow: visible;
+  height:auto;
+}
+
+/* Styles for the tree nodes */
+.tree-node {
+  display: inline-block;
+  padding: 0.25px;
+  margin-bottom: 5px;
+  background-color: #000000;
+  border-radius: 7px;
+  border: 1px solid transparent; /* Default border */
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  cursor: pointer; /* Show hand icon on hover */
+  transition: border-color 1.3s ease, box-shadow 1.3s ease;
+}
+
+/* Hand cursor and box shadow on hover */
+.tree-node:hover {
+  border-color: transparent;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tree node children transition */
+.tree-node-children {
+  overflow: hidden;
+  transition: max-height 0.5s ease; /* Smooth transition for expanding/collapsing */
+}
+
+/* Header styles */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* App.css */
+
+/* Context menu styling */
+.context-menu {
+  background-color: #000;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  list-style: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.context-menu li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.context-menu li:hover {
+  background-color: #49494970;
 }

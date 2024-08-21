@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ariakit/react": "^0.4.10",
+    "ariakit": "^2.0.0-next.44",
+    "framer-motion": "^11.3.29",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
