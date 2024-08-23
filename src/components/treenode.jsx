@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { CompositeItem } from "ariakit/composite";
+import { useCompositeState, Composite, CompositeItem, CompositeGroup } from "ariakit/composite";
 
-export const TreeNode = ({ node, level = 0 }) => {
+export const TreeNode = ({ node, level = 0, compositeState }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [height, setHeight] = useState("0px");
   const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0 });
   const contentRef = useRef(null);
-  
+
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -49,9 +49,14 @@ export const TreeNode = ({ node, level = 0 }) => {
   return (
     <div style={{ marginLeft: `${indentation}px`, overflow: "visible" }}>
       <CompositeItem
+        {...compositeState}
         as="div"
         role="treeitem"
         aria-expanded={isExpanded}
+        aria-label={node.name}
+        aria-level={level + 1}
+        aria-setsize={node.children ? node.children.length : 0}
+        aria-posinset={node.id} // Assuming each node has a unique id, used for posinset
         onClick={toggleExpand}
         onContextMenu={handleContextMenu}
         className="tree-node"
@@ -81,14 +86,15 @@ export const TreeNode = ({ node, level = 0 }) => {
         onTransitionEnd={handleTransitionEnd}
       >
         {isExpanded && node.children && (
-          <div role="group" style={{ padding: "8px 0" }}>
-            {node.children.map((childNode) => (
-              <TreeNode key={childNode.id} node={childNode} level={level + 1} />
-            ))}
-          </div>
+          <CompositeGroup role="group">
+            <div role="group" style={{ padding: "8px 0" }}>
+              {node.children.map((childNode) => (
+                <TreeNode key={childNode.id} node={childNode} level={level + 1} compositeState={compositeState} />
+              ))}
+            </div>
+          </CompositeGroup>
         )}
       </div>
     </div>
   );
 };
-
